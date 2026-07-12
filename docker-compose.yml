@@ -11,28 +11,33 @@ services:
     volumes:
       - db_auth_data:/var/lib/postgresql/data
     networks:
-      - erp-db-auth-network
+      - erp-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U adriano -d db_auth"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     restart: unless-stopped
-    command: ["postgres", "-c", "timezone=America/Lima"]
 
   app:
-    image: eclipse-temurin:17-jre
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: erp-ms-auth
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     ports:
       - "8081:8081"
-    volumes:
-      - ./target:/app
-    working_dir: /app
-    command: ["java", "-jar", "db_auth-0.0.1-SNAPSHOT.jar"]
+    env_file:
+      - .env
     networks:
-      - erp-db-auth-network
+      - erp-network
     restart: unless-stopped
 
 volumes:
   db_auth_data:
 
 networks:
-  erp-db-auth-network:
+  erp-network:
     driver: bridge

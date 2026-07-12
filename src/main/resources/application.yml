@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: ${SPRING_APP_NAME:db_auth}
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/db_auth}
+    username: ${DATABASE_USERNAME:adriano}
+    password: ${DATABASE_PASSWORD:password123}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: ${JPA_DDL_AUTO:update}
+    show-sql: ${JPA_SHOW_SQL:false}
+    open-in-view: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+
+server:
+  port: ${SERVER_PORT:8081}
+
+eureka:
+  client:
+    enabled: false
+    register-with-eureka: false
+    fetch-registry: false
+
+logging:
+  level:
+    org.springframework.security: INFO
+    com.auth.db_auth: INFO
+
+app:
+  seed:
+    enabled: ${SEED_ENABLED:true}
