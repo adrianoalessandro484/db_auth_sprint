@@ -18,4 +18,4 @@ COPY --from=build /workspace/target/*.jar app.jar
 
 EXPOSE ${SERVER_PORT}
 
-ENTRYPOINT ["java", "-jar", "/app/app.jar"]
+ENTRYPOINT ["sh", "-c", "SERVER_PORT=${SERVER_PORT:-${PORT:-8080}} java -jar /app/app.jar"]
