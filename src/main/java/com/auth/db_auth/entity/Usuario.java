@@ -40,8 +40,10 @@ public class Usuario {
     private String role;
 
     @Column(nullable = false)
+    @lombok.Builder.Default
     private Boolean activo = true;
 
     @Column(name = "created_at", nullable = false, updatable = false)
+    @lombok.Builder.Default
     private LocalDateTime createdAt = LocalDateTime.now();
 }
