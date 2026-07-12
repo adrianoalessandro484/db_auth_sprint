@@ -8,17 +8,3 @@ healthcheckPath = "/api/auth/health"
 healthcheckTimeout = 30
 restartPolicyType = "ON_FAILURE"
 restartPolicyMaxRetries = 3
-
-[[deploy.env]]
-# Railway inyecta esto desde tu Postgres "DB_Auth" (creala si no existe)
-# Formato: jdbc:postgresql://HOST:PORT/DBNAME
-DATABASE_URL = "jdbc:postgresql://YOUR_RAILWAY_DB_HOST:5432/db_auth"
-DATABASE_USERNAME = "adriano"
-DATABASE_PASSWORD = "password123"
-SPRING_APP_NAME = "db_auth"
-SERVER_PORT = "${{PORT}}"
-SEED_ENABLED = "true"
-SEED_ADMIN_EMAIL = "admin@contreras.com"
-SEED_ADMIN_PASSWORD = "admin123"
-SEED_ADMIN_NAME = "ADMINISTRADOR"
-JPA_SHOW_SQL = "false"
