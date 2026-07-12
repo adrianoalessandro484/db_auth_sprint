@@ -16,6 +16,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends curl \
 
 COPY --from=build /workspace/target/*.jar app.jar
 
-EXPOSE ${SERVER_PORT}
+EXPOSE 8081
+
+ENV SERVER_PORT=8081
 
 ENTRYPOINT ["java", "-jar", "/app/app.jar"]
